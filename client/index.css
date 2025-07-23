@@ -8,24 +8,21 @@
   transform: scale(3.75);
   transform-origin: top left;
   image-rendering: pixelated;
-  border-radius: 2px;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  border-radius: 1px;
 }
 
-/* Container Grid (13x13 scaled tiles) */
+/* Container Grid (15x15 scaled tiles) */
 .Map_container {
   display: grid;
   grid-template-rows: repeat(15, 60px);
   grid-template-columns: repeat(15, 60px);
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  background: #2c3e50;
   width: fit-content;
   gap: 0;
-  border: 3px solid #4a90e2;
-  border-radius: 12px;
-  box-shadow: 
-    0 0 30px rgba(74, 144, 226, 0.3),
-    inset 0 0 20px rgba(0, 0, 0, 0.3);
+  border: 2px solid #34495e;
+  border-radius: 8px;
   position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .gameContainer {
@@ -35,28 +32,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
-  border-radius: 16px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   position: relative;
   overflow: hidden;
 }
 
-.gameContainer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%);
-  pointer-events: none;
-}
-
 body {
-  background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 50%, #2d2d2d 100%);
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #2d2d2d 100%);
   margin: 0;
   padding: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -66,7 +50,7 @@ body {
   justify-content: center;
 }
 
-/* Sprite positions - enhanced with better visual effects */
+/* Clear tile distinctions using original sprite positions */
 .panel-yellow { background-position: 0 0; }
 .door-frame { background-position: -16px 0; }
 .ladder-top { background-position: -32px 0; }
@@ -85,46 +69,40 @@ body {
 .mech-body { background-position: -48px -160px; }
 .exit-door-top { background-position: -112px 0; }
 
-/* Enhanced WALL Tiles */
+/* WALL Tiles - Dark/Solid looking */
 .WALL-tech { background-position: -0px -0px; }
 .WALL-purple-rock { 
   background-position: -80px -0px;
-  box-shadow: inset 0 0 10px rgba(138, 43, 226, 0.3);
 }
 .WALL-ice { 
   background-position: -64px -48px;
-  box-shadow: inset 0 0 10px rgba(173, 216, 230, 0.3);
 }
 .WALL-cliff { 
   background-position: -128px -16px;
-  box-shadow: inset 0 0 10px rgba(105, 105, 105, 0.3);
 }
 .WALL-mech { background-position: -128px -96px; }
 
-/* Enhanced BLOCK Tiles */
+/* BLOCK Tiles - Destructible looking */
 .BLOCK-metal { background-position: -16px -0px; }
 .BLOCK-terminal { background-position: -64px -0px; }
 .BLOCK-snow-rock { 
   background-position: -80px -48px;
-  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.2);
 }
 .BLOCK-mech-head { background-position: -160px -96px; }
 
-/* Enhanced EMPTY Tiles */
+/* EMPTY Tiles - Ground/walkable */
 .EMPTY-snow { background-position: -0px -48px; }
 .EMPTY-base { background-position: -32px -0px; }
 .EMPTY-dark { background-position: -144px -16px; }
-.EMPTY { background: rgba(0, 0, 0, 0.1); }
+.ice-rock { background-position: -32px -64px; }
 
 /* Timer styling */
 .timer {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: bold;
   color: #00ff88;
-  text-shadow: 
-    0 0 10px rgba(0, 255, 136, 0.5),
-    0 0 20px rgba(0, 255, 136, 0.3);
-  background: rgba(0, 0, 0, 0.7);
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+  background: rgba(0, 0, 0, 0.8);
   padding: 8px 16px;
   border-radius: 8px;
   border: 2px solid #00ff88;
@@ -140,50 +118,58 @@ body {
 /* PowerUp styling */
 .powerUp {
   position: fixed;
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(circle, #ffd700 0%, #ffb347 100%);
   border: 3px solid #fff;
   border-radius: 50%;
   z-index: 10;
-  box-shadow: 
-    0 0 20px rgba(255, 107, 107, 0.6),
-    inset 0 0 10px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
   animation: powerUpFloat 2s ease-in-out infinite;
+  top: 5px;
+  left: 5px;
 }
 
 @keyframes powerUpFloat {
   0%, 100% { transform: translateY(0px) scale(1); }
-  50% { transform: translateY(-5px) scale(1.1); }
+  50% { transform: translateY(-3px) scale(1.05); }
 }
 
 /* Player styling */
 .Player {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   position: absolute;
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
   border: 3px solid #fff;
-  border-radius: 12px;
+  border-radius: 8px;
   z-index: 10;
-  box-shadow: 
-    0 4px 15px rgba(79, 172, 254, 0.4),
-    inset 0 0 10px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 3px 10px rgba(52, 152, 219, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
   color: #fff;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  font-size: 12px;
-  transition: all 0.2s ease;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  font-size: 10px;
+  transition: all 0.1s ease;
+  top: 5px;
+  left: 5px;
 }
 
-.Player:hover {
-  transform: scale(1.05);
-  box-shadow: 
-    0 6px 20px rgba(79, 172, 254, 0.6),
-    inset 0 0 15px rgba(255, 255, 255, 0.3);
+.Player:nth-child(2) {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  box-shadow: 0 3px 10px rgba(231, 76, 60, 0.4);
+}
+
+.Player:nth-child(3) {
+  background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+  box-shadow: 0 3px 10px rgba(243, 156, 18, 0.4);
+}
+
+.Player:nth-child(4) {
+  background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+  box-shadow: 0 3px 10px rgba(155, 89, 182, 0.4);
 }
 
 /* Win/Lose styling */
@@ -203,7 +189,7 @@ body {
 
 .win {
   color: #00ff88;
-  background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 255, 136, 0.1));
+  background: rgba(0, 255, 136, 0.1);
   border: 3px solid #00ff88;
   text-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
   box-shadow: 0 0 40px rgba(0, 255, 136, 0.4);
@@ -211,7 +197,7 @@ body {
 
 .loose {
   color: #ff4757;
-  background: linear-gradient(135deg, rgba(255, 71, 87, 0.2), rgba(255, 71, 87, 0.1));
+  background: rgba(255, 71, 87, 0.1);
   border: 3px solid #ff4757;
   text-shadow: 0 0 20px rgba(255, 71, 87, 0.8);
   box-shadow: 0 0 40px rgba(255, 71, 87, 0.4);
@@ -231,33 +217,33 @@ body {
 /* Bomb styling */
 .bomb {
   position: fixed;
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, #ff4757 0%, #ff3742 100%);
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(circle, #ff4757 0%, #c44569 100%);
   border: 3px solid #fff;
   border-radius: 50%;
   z-index: 9;
-  box-shadow: 
-    0 0 20px rgba(255, 71, 87, 0.6),
-    inset 0 0 10px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 15px rgba(255, 71, 87, 0.6);
   animation: bombPulse 0.5s ease-in-out infinite;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
   color: #fff;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  font-size: 12px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  font-size: 10px;
+  top: 5px;
+  left: 5px;
 }
 
 @keyframes bombPulse {
   0%, 100% { 
     transform: scale(1);
-    box-shadow: 0 0 20px rgba(255, 71, 87, 0.6);
+    box-shadow: 0 0 15px rgba(255, 71, 87, 0.6);
   }
   50% { 
     transform: scale(1.1);
-    box-shadow: 0 0 30px rgba(255, 71, 87, 0.8);
+    box-shadow: 0 0 25px rgba(255, 71, 87, 0.8);
   }
 }
 
@@ -267,17 +253,14 @@ body {
   right: 10px;
   bottom: 10px;
   width: 280px;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(26, 26, 46, 0.9));
+  background: rgba(0, 0, 0, 0.85);
   border: 2px solid #4a90e2;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 12px;
   color: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 13px;
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .messages {
@@ -305,7 +288,7 @@ body {
   margin-bottom: 6px;
   line-height: 1.4;
   padding: 4px 8px;
-  border-radius: 6px;
+  border-radius: 4px;
   background: rgba(255, 255, 255, 0.05);
   border-left: 3px solid #4a90e2;
 }
@@ -313,7 +296,6 @@ body {
 .player {
   color: #4CAF50;
   font-weight: bold;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .chat-input {
@@ -322,7 +304,7 @@ body {
   background: rgba(255, 255, 255, 0.1);
   color: white;
   border: 2px solid rgba(74, 144, 226, 0.3);
-  border-radius: 8px;
+  border-radius: 6px;
   font-size: 13px;
   transition: all 0.3s ease;
   box-sizing: border-box;
@@ -332,7 +314,6 @@ body {
   outline: none;
   border-color: #4a90e2;
   background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
 }
 
 .chat-input::placeholder {
@@ -342,15 +323,14 @@ body {
 /* Player count and UI elements */
 .player-count {
   color: #fff;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
-  background: linear-gradient(135deg, rgba(74, 144, 226, 0.2), rgba(74, 144, 226, 0.1));
+  background: rgba(74, 144, 226, 0.2);
   border: 2px solid #4a90e2;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 8px 16px;
   display: inline-block;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 4px 15px rgba(74, 144, 226, 0.2);
+  margin: 5px;
 }
 
 /* Name input styling */
@@ -358,22 +338,18 @@ body {
   padding: 12px 20px;
   font-size: 16px;
   border: 2px solid #4a90e2;
-  border-radius: 12px;
+  border-radius: 8px;
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
   text-align: center;
-  backdrop-filter: blur(10px);
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  margin: 5px;
 }
 
 .NameInput:focus {
   outline: none;
   border-color: #00ff88;
   background: rgba(255, 255, 255, 0.15);
-  box-shadow: 
-    0 0 20px rgba(0, 255, 136, 0.3),
-    0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .NameInput::placeholder {
@@ -404,26 +380,4 @@ body {
     right: 5px;
     bottom: 5px;
   }
-}
-
-/* Additional visual enhancements */
-.tile:hover {
-  filter: brightness(1.1);
-}
-
-/* Smooth transitions for all interactive elements */
-* {
-  transition: all 0.2s ease;
-}
-
-/* Loading animation for waiting state */
-@keyframes loadingDots {
-  0%, 20% { opacity: 0; }
-  50% { opacity: 1; }
-  80%, 100% { opacity: 0; }
-}
-
-.loading-dots::after {
-  content: '...';
-  animation: loadingDots 1.5s infinite;
 }
