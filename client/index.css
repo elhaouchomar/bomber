@@ -1,52 +1,155 @@
-/* Base Sprite Style */
+/* === CREATIVE BOMBERMAN STYLING === */
+/* Base tile styling - dimensions preserved */
 .tile {
   width: 16px;
   height: 16px;
-  background: linear-gradient(45deg, #2c3e50, #34495e);
   background-repeat: no-repeat;
   display: inline-block;
   transform: scale(3.75);
   transform-origin: top left;
   image-rendering: pixelated;
-  border-radius: 1px;
-  transition: all 0.3s ease;
+  border-radius: 2px;
   position: relative;
+  overflow: hidden;
 }
 
-.tile::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: inherit;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-/* Container Grid (15x15 scaled tiles) */
+/* === CREATIVE MAP CONTAINER === */
 .Map_container {
   display: grid;
   grid-template-rows: repeat(15, 60px);
   grid-template-columns: repeat(15, 60px);
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
   width: fit-content;
   gap: 0;
-  border: 3px solid #00d4ff;
-  border-radius: 8px;
+  border: 4px solid;
+  border-image: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff, #06ffa5) 1;
+  border-radius: 12px;
   position: relative;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(255, 0, 110, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(131, 56, 236, 0.1) 0%, transparent 50%),
+    linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
   box-shadow: 
-    0 0 20px rgba(0, 212, 255, 0.3),
-    inset 0 0 20px rgba(0, 212, 255, 0.1);
-  animation: mapGlow 3s ease-in-out infinite alternate;
+    0 0 30px rgba(255, 0, 110, 0.3),
+    0 0 60px rgba(131, 56, 236, 0.2),
+    inset 0 0 30px rgba(58, 134, 255, 0.1);
+  animation: mapBorderFlow 4s linear infinite, mapGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes mapBorderFlow {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
 }
 
 @keyframes mapGlow {
-  0% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(0, 212, 255, 0.1); }
-  100% { box-shadow: 0 0 30px rgba(0, 212, 255, 0.5), inset 0 0 30px rgba(0, 212, 255, 0.2); }
+  0% { 
+    box-shadow: 
+      0 0 30px rgba(255, 0, 110, 0.3),
+      0 0 60px rgba(131, 56, 236, 0.2),
+      inset 0 0 30px rgba(58, 134, 255, 0.1);
+  }
+  100% { 
+    box-shadow: 
+      0 0 50px rgba(255, 0, 110, 0.5),
+      0 0 80px rgba(131, 56, 236, 0.4),
+      inset 0 0 50px rgba(58, 134, 255, 0.2);
+  }
 }
 
+/* === CREATIVE WALL TILES === */
+.WALL-purple-rock { 
+  background: 
+    linear-gradient(45deg, #2d1b69 0%, #11998e 25%, #2d1b69 50%, #11998e 75%, #2d1b69 100%),
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  border: 1px solid #11998e;
+  box-shadow: 
+    inset 0 0 10px rgba(17, 153, 142, 0.3),
+    0 0 5px rgba(17, 153, 142, 0.2);
+  animation: wallShimmer 3s ease-in-out infinite alternate;
+}
+
+@keyframes wallShimmer {
+  0% { filter: brightness(1) saturate(1); }
+  100% { filter: brightness(1.2) saturate(1.3); }
+}
+
+.WALL-ice { 
+  background: 
+    linear-gradient(135deg, #667eea 0%, #764ba2 25%, #667eea 50%, #764ba2 75%, #667eea 100%),
+    radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.3) 0%, transparent 60%);
+  border: 1px solid #764ba2;
+  box-shadow: 
+    inset 0 0 8px rgba(102, 126, 234, 0.4),
+    0 0 6px rgba(118, 75, 162, 0.3);
+  animation: iceFlow 4s linear infinite;
+}
+
+@keyframes iceFlow {
+  0% { background-position: 0% 0%, 0% 0%; }
+  100% { background-position: 100% 100%, 50% 50%; }
+}
+
+.WALL-cliff { 
+  background: 
+    linear-gradient(45deg, #434343 0%, #000000 25%, #434343 50%, #000000 75%, #434343 100%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 80%);
+  border: 1px solid #000000;
+  box-shadow: 
+    inset 0 0 12px rgba(0, 0, 0, 0.8),
+    0 0 3px rgba(67, 67, 67, 0.2);
+  animation: cliffPulse 5s ease-in-out infinite;
+}
+
+@keyframes cliffPulse {
+  0%, 100% { transform: scale(3.75); }
+  50% { transform: scale(3.78); }
+}
+
+/* === CREATIVE BLOCK TILES === */
+.BLOCK-snow-rock { 
+  background: 
+    linear-gradient(45deg, #ff9a9e 0%, #fecfef 25%, #fecfef 50%, #ff9a9e 75%, #fecfef 100%),
+    radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+  border: 1px solid #ff9a9e;
+  box-shadow: 
+    inset 0 0 8px rgba(254, 207, 239, 0.5),
+    0 0 8px rgba(255, 154, 158, 0.3);
+  animation: blockFloat 3s ease-in-out infinite, blockGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes blockFloat {
+  0%, 100% { transform: scale(3.75) translateY(0px); }
+  50% { transform: scale(3.78) translateY(-1px); }
+}
+
+@keyframes blockGlow {
+  0% { filter: brightness(1) hue-rotate(0deg); }
+  100% { filter: brightness(1.1) hue-rotate(10deg); }
+}
+
+/* === CREATIVE GROUND TILES === */
+.ice-rock { 
+  background: 
+    linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%),
+    radial-gradient(circle at 60% 40%, rgba(255, 255, 255, 0.2) 0%, transparent 60%);
+  border: 1px solid rgba(102, 126, 234, 0.3);
+  box-shadow: 
+    inset 0 0 6px rgba(245, 87, 108, 0.2),
+    0 0 4px rgba(79, 172, 254, 0.2);
+  animation: groundFlow 6s linear infinite, groundShine 4s ease-in-out infinite;
+  position: relative;
+}
+
+@keyframes groundFlow {
+  0% { background-position: 0% 0%, 0% 0%; }
+  100% { background-position: 200% 200%, 100% 100%; }
+}
+
+@keyframes groundShine {
+  0%, 100% { filter: brightness(1) saturate(1); }
+  50% { filter: brightness(1.15) saturate(1.2); }
+}
+
+/* === CREATIVE GAME CONTAINER === */
 .gameContainer {
   width: 500px;
   height: 500px;
@@ -55,21 +158,43 @@
   align-items: center;
   justify-content: center;
   background: 
-    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(255, 0, 110, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(131, 56, 236, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(58, 134, 255, 0.1) 0%, transparent 70%),
     linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 50%, #2d2d2d 100%);
-  border-radius: 12px;
+  border-radius: 16px;
+  border: 2px solid;
+  border-image: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff, #06ffa5) 1;
   box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.6),
-    0 0 40px rgba(0, 212, 255, 0.1);
+    0 10px 40px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(255, 0, 110, 0.1),
+    inset 0 0 40px rgba(58, 134, 255, 0.05);
   position: relative;
   overflow: hidden;
+  animation: containerPulse 8s ease-in-out infinite;
 }
 
+@keyframes containerPulse {
+  0%, 100% { 
+    box-shadow: 
+      0 10px 40px rgba(0, 0, 0, 0.6),
+      0 0 60px rgba(255, 0, 110, 0.1),
+      inset 0 0 40px rgba(58, 134, 255, 0.05);
+  }
+  50% { 
+    box-shadow: 
+      0 15px 50px rgba(0, 0, 0, 0.7),
+      0 0 80px rgba(255, 0, 110, 0.2),
+      inset 0 0 60px rgba(58, 134, 255, 0.1);
+  }
+}
+
+/* === CREATIVE BODY BACKGROUND === */
 body {
   background: 
-    radial-gradient(circle at 25% 25%, #1a1a2e 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, #16213e 0%, transparent 50%),
+    radial-gradient(circle at 25% 25%, #ff006e 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, #8338ec 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, #3a86ff 0%, transparent 70%),
     linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #2d2d2d 100%);
   margin: 0;
   padding: 20px;
@@ -78,341 +203,315 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: backgroundShift 10s ease-in-out infinite alternate;
+  animation: backgroundShift 15s ease-in-out infinite;
 }
 
 @keyframes backgroundShift {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(20deg); }
+  0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+  33% { filter: hue-rotate(120deg) brightness(1.1); }
+  66% { filter: hue-rotate(240deg) brightness(0.9); }
 }
 
-/* WALL Tiles - Dark/Solid looking */
-.WALL-purple-rock { 
-  background: 
-    linear-gradient(45deg, #2c3e50 0%, #34495e 50%, #2c3e50 100%),
-    radial-gradient(circle at center, rgba(52, 73, 94, 0.8) 0%, transparent 70%);
-  border: 1px solid #34495e;
-  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.5);
-}
-
-.WALL-ice { 
-  background: 
-    linear-gradient(135deg, #74b9ff 0%, #0984e3 50%, #74b9ff 100%);
-  border: 1px solid #0984e3;
-  box-shadow: 
-    inset 0 0 8px rgba(116, 185, 255, 0.3),
-    0 0 4px rgba(116, 185, 255, 0.2);
-  animation: iceShimmer 2s ease-in-out infinite alternate;
-}
-
-@keyframes iceShimmer {
-  0% { filter: brightness(1); }
-  100% { filter: brightness(1.2); }
-}
-
-.WALL-cliff { 
-  background: 
-    linear-gradient(45deg, #636e72 0%, #2d3436 50%, #636e72 100%);
-  border: 1px solid #2d3436;
-  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.7);
-}
-
-/* BLOCK Tiles - Destructible looking */
-.BLOCK-snow-rock { 
-  background: 
-    linear-gradient(45deg, #a29bfe 0%, #6c5ce7 50%, #a29bfe 100%);
-  border: 1px solid #6c5ce7;
-  box-shadow: 
-    inset 0 0 6px rgba(162, 155, 254, 0.4),
-    0 0 3px rgba(162, 155, 254, 0.3);
-  animation: blockPulse 3s ease-in-out infinite;
-}
-
-@keyframes blockPulse {
-  0%, 100% { transform: scale(3.75); }
-  50% { transform: scale(3.8); }
-}
-
-/* EMPTY Tiles - Ground/walkable */
-.ice-rock { background-position: -32px -64px; }
-  background: 
-    linear-gradient(135deg, #00cec9 0%, #00b894 50%, #00cec9 100%);
-  border: 1px solid rgba(0, 206, 201, 0.3);
-  box-shadow: inset 0 0 4px rgba(0, 206, 201, 0.2);
-  position: relative;
-}
-
-.ice-rock::before {
-  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3) 0%, transparent 50%);
-  opacity: 1;
-  animation: groundShine 4s ease-in-out infinite;
-}
-
-@keyframes groundShine {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.6; }
-/* Timer styling */
-.timer {
-  font-size: 28px;
-  font-weight: bold;
-  color: #00d4ff;
-  text-shadow: 
-    0 0 10px rgba(0, 212, 255, 0.8),
-    0 0 20px rgba(0, 212, 255, 0.4);
-  background: rgba(0, 0, 0, 0.8);
-  padding: 8px 16px;
-  border-radius: 8px;
-  border: 2px solid #00d4ff;
-  margin-bottom: 16px;
-  animation: timerPulse 2s infinite;
-}
-
-@keyframes timerPulse {
-  0%, 100% { 
-    transform: scale(1);
-    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-  }
-  50% { 
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
-  }
-}
-
-/* PowerUp styling */
-.powerUp {
-  position: fixed;
-  width: 50px;
-  height: 50px;
-  background: 
-    radial-gradient(circle at 30% 30%, #fff 0%, #ffd700 30%, #ff6b35 100%);
-  border: 3px solid #fff;
-  border-radius: 50%;
-  z-index: 10;
-  box-shadow: 
-    0 0 15px rgba(255, 215, 0, 0.8),
-    0 0 30px rgba(255, 107, 53, 0.4);
-  animation: powerUpFloat 2s ease-in-out infinite;
-  top: 5px;
-  left: 5px;
-}
-
-@keyframes powerUpFloat {
-  0%, 100% { 
-    transform: translateY(0px) scale(1) rotate(0deg);
-    filter: hue-rotate(0deg);
-  }
-  50% { 
-    transform: translateY(-3px) scale(1.1) rotate(180deg);
-    filter: hue-rotate(60deg);
-  }
-}
-
-/* Player styling */
+/* === CREATIVE PLAYERS === */
 .Player {
   width: 50px;
   height: 50px;
   position: absolute;
-  background: 
-    radial-gradient(circle at 30% 30%, #74b9ff 0%, #0984e3 50%, #2d3436 100%);
-  border: 3px solid #ddd;
+  border: 3px solid #fff;
   border-radius: 50%;
   z-index: 10;
-  box-shadow: 
-    0 0 15px rgba(116, 185, 255, 0.6),
-    inset 0 0 10px rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
   color: #fff;
-  text-shadow: 
-    0 0 5px rgba(0, 0, 0, 0.8),
-    0 0 10px rgba(116, 185, 255, 0.5);
   font-size: 10px;
   transition: all 0.2s ease;
   top: 5px;
   left: 5px;
-  animation: playerGlow 3s ease-in-out infinite alternate;
+  position: relative;
+  overflow: hidden;
+  animation: playerFloat 3s ease-in-out infinite;
+}
+
+@keyframes playerFloat {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-2px) scale(1.05); }
+}
+
+/* Player 1 - Cosmic Blue */
+.Player:nth-child(1) {
+  background: 
+    radial-gradient(circle at 30% 30%, #00d4ff 0%, #0099cc 30%, #006699 70%, #003366 100%),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+  box-shadow: 
+    0 0 20px rgba(0, 212, 255, 0.6),
+    inset 0 0 15px rgba(255, 255, 255, 0.2),
+    0 0 40px rgba(0, 212, 255, 0.3);
+  animation: playerFloat 3s ease-in-out infinite, cosmicGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes cosmicGlow {
+  0% { filter: brightness(1) hue-rotate(0deg); }
+  100% { filter: brightness(1.2) hue-rotate(30deg); }
+}
+
+/* Player 2 - Fire Red */
+.Player:nth-child(2) {
+  background: 
+    radial-gradient(circle at 30% 30%, #ff4757 0%, #ff3742 30%, #c44569 70%, #8b2635 100%),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.3) 0%, transparent 50%);
+  box-shadow: 
+    0 0 20px rgba(255, 71, 87, 0.6),
+    inset 0 0 15px rgba(255, 255, 255, 0.2),
+    0 0 40px rgba(255, 71, 87, 0.3);
+  animation: playerFloat 3s ease-in-out infinite, fireGlow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes fireGlow {
+  0% { filter: brightness(1) saturate(1); }
+  100% { filter: brightness(1.3) saturate(1.5); }
+}
+
+/* Player 3 - Golden Sun */
+.Player:nth-child(3) {
+  background: 
+    radial-gradient(circle at 30% 30%, #ffd700 0%, #ffb347 30%, #ff8c00 70%, #cc7000 100%),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.4) 0%, transparent 50%);
+  box-shadow: 
+    0 0 20px rgba(255, 215, 0, 0.6),
+    inset 0 0 15px rgba(255, 255, 255, 0.3),
+    0 0 40px rgba(255, 140, 0, 0.3);
+  animation: playerFloat 3s ease-in-out infinite, goldenGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes goldenGlow {
+  0%, 100% { filter: brightness(1) hue-rotate(0deg); }
+  50% { filter: brightness(1.4) hue-rotate(20deg); }
+}
+
+/* Player 4 - Mystic Purple */
+.Player:nth-child(4) {
+  background: 
+    radial-gradient(circle at 30% 30%, #a29bfe 0%, #6c5ce7 30%, #5f3dc4 70%, #4c2a85 100%),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+  box-shadow: 
+    0 0 20px rgba(162, 155, 254, 0.6),
+    inset 0 0 15px rgba(255, 255, 255, 0.2),
+    0 0 40px rgba(108, 92, 231, 0.3);
+  animation: playerFloat 3s ease-in-out infinite, mysticGlow 3s ease-in-out infinite;
+}
+
+@keyframes mysticGlow {
+  0% { filter: brightness(1) hue-rotate(0deg) saturate(1); }
+  33% { filter: brightness(1.2) hue-rotate(60deg) saturate(1.3); }
+  66% { filter: brightness(1.1) hue-rotate(-30deg) saturate(1.1); }
+  100% { filter: brightness(1) hue-rotate(0deg) saturate(1); }
+}
+
+/* === CREATIVE BOMBS === */
+.bomb {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  background: 
+    radial-gradient(circle at 25% 25%, #ff4757 0%, #c44569 40%, #8b2635 80%, #000 100%),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  border: 3px solid #fff;
+  border-radius: 50%;
+  z-index: 9;
+  box-shadow: 
+    0 0 25px rgba(255, 71, 87, 0.8),
+    inset 0 0 15px rgba(255, 255, 255, 0.2),
+    0 0 50px rgba(255, 71, 87, 0.4);
+  animation: bombDanger 0.3s ease-in-out infinite, bombSpin 4s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #fff;
+  font-size: 10px;
+  top: 5px;
+  left: 5px;
   position: relative;
   overflow: hidden;
 }
 
-.Player::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
-  animation: playerShine 2s linear infinite;
+@keyframes bombDanger {
+  0%, 100% { 
+    transform: scale(1) rotate(0deg);
+    filter: brightness(1);
+  }
+  50% { 
+    transform: scale(1.1) rotate(5deg);
+    filter: brightness(1.3);
+  }
 }
 
-@keyframes playerGlow {
-  0% { box-shadow: 0 0 15px rgba(116, 185, 255, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.2); }
-  100% { box-shadow: 0 0 25px rgba(116, 185, 255, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.3); }
+@keyframes bombSpin {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
 }
 
-@keyframes playerShine {
-  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-}
-
-.Player:nth-child(2) {
+/* === CREATIVE POWER-UPS === */
+.powerUp {
+  position: fixed;
+  width: 50px;
+  height: 50px;
   background: 
-    radial-gradient(circle at 30% 30%, #ff7675 0%, #e17055 50%, #2d3436 100%);
+    radial-gradient(circle at 30% 30%, #ffd700 0%, #ff8c00 30%, #ff6b35 60%, #e74c3c 100%),
+    linear-gradient(45deg, rgba(255, 255, 255, 0.5) 0%, transparent 70%);
+  border: 3px solid #fff;
+  border-radius: 50%;
+  z-index: 10;
   box-shadow: 
-    0 0 15px rgba(255, 118, 117, 0.6),
-    inset 0 0 10px rgba(255, 255, 255, 0.2);
-  animation: playerGlow2 3s ease-in-out infinite alternate;
+    0 0 30px rgba(255, 215, 0, 0.8),
+    0 0 60px rgba(255, 107, 53, 0.4),
+    inset 0 0 20px rgba(255, 255, 255, 0.3);
+  animation: powerUpMagic 2s ease-in-out infinite, powerUpSpin 3s linear infinite;
+  top: 5px;
+  left: 5px;
 }
 
-@keyframes playerGlow2 {
-  0% { box-shadow: 0 0 15px rgba(255, 118, 117, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.2); }
-  100% { box-shadow: 0 0 25px rgba(255, 118, 117, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.3); }
+@keyframes powerUpMagic {
+  0%, 100% { 
+    transform: translateY(0px) scale(1);
+    filter: brightness(1) hue-rotate(0deg);
+  }
+  50% { 
+    transform: translateY(-5px) scale(1.15);
+    filter: brightness(1.3) hue-rotate(180deg);
+  }
 }
 
-.Player:nth-child(3) {
+@keyframes powerUpSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* === CREATIVE UI ELEMENTS === */
+.timer {
+  font-size: 28px;
+  font-weight: bold;
+  color: #00d4ff;
+  text-shadow: 
+    0 0 15px rgba(0, 212, 255, 0.8),
+    0 0 30px rgba(0, 212, 255, 0.4),
+    0 0 45px rgba(0, 212, 255, 0.2);
   background: 
-    radial-gradient(circle at 30% 30%, #fdcb6e 0%, #e17055 50%, #2d3436 100%);
-  box-shadow: 
-    0 0 15px rgba(253, 203, 110, 0.6),
-    inset 0 0 10px rgba(255, 255, 255, 0.2);
-  animation: playerGlow3 3s ease-in-out infinite alternate;
+    linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 212, 255, 0.1) 100%);
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: 2px solid #00d4ff;
+  margin-bottom: 16px;
+  animation: timerUrgent 1s ease-in-out infinite;
 }
 
-@keyframes playerGlow3 {
-  0% { box-shadow: 0 0 15px rgba(253, 203, 110, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.2); }
-  100% { box-shadow: 0 0 25px rgba(253, 203, 110, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.3); }
+@keyframes timerUrgent {
+  0%, 100% { 
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% { 
+    transform: scale(1.05);
+    filter: brightness(1.2);
+  }
 }
 
-.Player:nth-child(4) {
-  background: 
-    radial-gradient(circle at 30% 30%, #a29bfe 0%, #6c5ce7 50%, #2d3436 100%);
-  box-shadow: 
-    0 0 15px rgba(162, 155, 254, 0.6),
-    inset 0 0 10px rgba(255, 255, 255, 0.2);
-  animation: playerGlow4 3s ease-in-out infinite alternate;
-}
-
-@keyframes playerGlow4 {
-  0% { box-shadow: 0 0 15px rgba(162, 155, 254, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.2); }
-  100% { box-shadow: 0 0 25px rgba(162, 155, 254, 0.8), inset 0 0 15px rgba(255, 255, 255, 0.3); }
-}
-
-/* Win/Lose styling */
+/* === WIN/LOSE EFFECTS === */
 .win, .loose {
   font-size: 48px;
   font-weight: bold;
   padding: 20px 40px;
-  border-radius: 16px;
+  border-radius: 20px;
   text-align: center;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
-  animation: gameEndAnimation 0.5s ease-out;
+  animation: gameEndSpectacle 1s ease-out;
 }
 
 .win {
   color: #00d4ff;
-  background: rgba(0, 212, 255, 0.1);
-  border: 3px solid #00d4ff;
-  text-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
-  box-shadow: 0 0 40px rgba(0, 212, 255, 0.4);
+  background: 
+    radial-gradient(circle at center, rgba(0, 212, 255, 0.2) 0%, rgba(0, 0, 0, 0.9) 100%);
+  border: 4px solid #00d4ff;
+  text-shadow: 
+    0 0 20px rgba(0, 212, 255, 1),
+    0 0 40px rgba(0, 212, 255, 0.8),
+    0 0 60px rgba(0, 212, 255, 0.6);
+  box-shadow: 
+    0 0 50px rgba(0, 212, 255, 0.6),
+    inset 0 0 30px rgba(0, 212, 255, 0.1);
+  animation: gameEndSpectacle 1s ease-out, winCelebration 2s ease-in-out infinite;
+}
+
+@keyframes winCelebration {
+  0%, 100% { filter: brightness(1) hue-rotate(0deg); }
+  50% { filter: brightness(1.5) hue-rotate(60deg); }
 }
 
 .loose {
   color: #ff4757;
-  background: rgba(255, 71, 87, 0.1);
-  border: 3px solid #ff4757;
-  text-shadow: 0 0 20px rgba(255, 71, 87, 0.8);
-  box-shadow: 0 0 40px rgba(255, 71, 87, 0.4);
+  background: 
+    radial-gradient(circle at center, rgba(255, 71, 87, 0.2) 0%, rgba(0, 0, 0, 0.9) 100%);
+  border: 4px solid #ff4757;
+  text-shadow: 
+    0 0 20px rgba(255, 71, 87, 1),
+    0 0 40px rgba(255, 71, 87, 0.8),
+    0 0 60px rgba(255, 71, 87, 0.6);
+  box-shadow: 
+    0 0 50px rgba(255, 71, 87, 0.6),
+    inset 0 0 30px rgba(255, 71, 87, 0.1);
+  animation: gameEndSpectacle 1s ease-out, looseDrama 1.5s ease-in-out infinite;
 }
 
-@keyframes gameEndAnimation {
+@keyframes looseDrama {
+  0%, 100% { filter: brightness(1) saturate(1); }
+  50% { filter: brightness(0.7) saturate(1.5); }
+}
+
+@keyframes gameEndSpectacle {
   0% { 
     opacity: 0; 
-    transform: translate(-50%, -50%) scale(0.5); 
+    transform: translate(-50%, -50%) scale(0.3) rotate(-180deg); 
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2) rotate(0deg);
   }
   100% { 
     opacity: 1; 
-    transform: translate(-50%, -50%) scale(1); 
+    transform: translate(-50%, -50%) scale(1) rotate(0deg); 
   }
 }
 
-/* Bomb styling */
-.bomb {
-  position: fixed;
-  width: 50px;
-  height: 50px;
-  background: 
-    radial-gradient(circle at 30% 30%, #ff4757 0%, #c44569 50%, #2d3436 100%);
-  border: 3px solid #fff;
-  border-radius: 50%;
-  z-index: 9;
-  box-shadow: 
-    0 0 15px rgba(255, 71, 87, 0.8),
-    inset 0 0 10px rgba(255, 255, 255, 0.2);
-  animation: bombPulse 0.5s ease-in-out infinite;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 
-    0 0 5px rgba(0, 0, 0, 0.8),
-    0 0 10px rgba(255, 71, 87, 0.5);
-  font-size: 10px;
-  top: 5px;
-  left: 5px;
-  position: relative;
-  overflow: hidden;
-}
-
-.bomb::before {
-  content: '';
-  position: absolute;
-  top: 20%;
-  left: 20%;
-  width: 60%;
-  height: 60%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: bombShine 1s ease-in-out infinite alternate;
-}
-
-@keyframes bombShine {
-  0% { opacity: 0.3; }
-  100% { opacity: 0.8; }
-}
-
-@keyframes bombPulse {
-  0%, 100% { 
-    transform: scale(1) rotate(0deg);
-    box-shadow: 0 0 15px rgba(255, 71, 87, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.2);
-  }
-  50% { 
-    transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 0 25px rgba(255, 71, 87, 1), inset 0 0 15px rgba(255, 255, 255, 0.3);
-  }
-}
-
-/* Chat Styles */
+/* === CREATIVE CHAT === */
 .chat-container {
   position: absolute;
   right: 10px;
   bottom: 10px;
   width: 280px;
-  background: rgba(0, 0, 0, 0.85);
-  border: 2px solid #4a90e2;
-  border-radius: 8px;
+  background: 
+    linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(58, 134, 255, 0.1) 100%);
+  backdrop-filter: blur(10px);
+  border: 2px solid;
+  border-image: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff) 1;
+  border-radius: 12px;
   padding: 12px;
   color: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 13px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(58, 134, 255, 0.2);
+  animation: chatGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes chatGlow {
+  0% { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(58, 134, 255, 0.2); }
+  100% { box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(58, 134, 255, 0.3); }
 }
 
 .messages {
@@ -432,31 +531,41 @@ body {
 }
 
 .messages::-webkit-scrollbar-thumb {
-  background: #4a90e2;
+  background: linear-gradient(45deg, #ff006e, #8338ec);
   border-radius: 3px;
 }
 
 .message {
   margin-bottom: 6px;
   line-height: 1.4;
-  padding: 4px 8px;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.05);
-  border-left: 3px solid #4a90e2;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: 
+    linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(58, 134, 255, 0.1) 100%);
+  border-left: 3px solid;
+  border-image: linear-gradient(45deg, #ff006e, #3a86ff) 1;
+  animation: messageAppear 0.3s ease-out;
+}
+
+@keyframes messageAppear {
+  0% { opacity: 0; transform: translateX(-10px); }
+  100% { opacity: 1; transform: translateX(0); }
 }
 
 .player {
-  color: #4CAF50;
+  color: #06ffa5;
   font-weight: bold;
+  text-shadow: 0 0 5px rgba(6, 255, 165, 0.5);
 }
 
 .chat-input {
   width: 100%;
-  padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.1);
+  padding: 10px 15px;
+  background: 
+    linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(58, 134, 255, 0.1) 100%);
   color: white;
-  border: 2px solid rgba(74, 144, 226, 0.3);
-  border-radius: 6px;
+  border: 2px solid rgba(58, 134, 255, 0.3);
+  border-radius: 8px;
   font-size: 13px;
   transition: all 0.3s ease;
   box-sizing: border-box;
@@ -464,51 +573,66 @@ body {
 
 .chat-input:focus {
   outline: none;
-  border-color: #4a90e2;
-  background: rgba(255, 255, 255, 0.15);
+  border-color: #3a86ff;
+  background: 
+    linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(58, 134, 255, 0.2) 100%);
+  box-shadow: 0 0 15px rgba(58, 134, 255, 0.3);
 }
 
 .chat-input::placeholder {
   color: rgba(255, 255, 255, 0.6);
 }
 
-/* Player count and UI elements */
+/* === CREATIVE UI ELEMENTS === */
 .player-count {
   color: #fff;
   font-size: 16px;
   font-weight: bold;
-  background: rgba(74, 144, 226, 0.2);
-  border: 2px solid #4a90e2;
-  border-radius: 8px;
+  background: 
+    linear-gradient(135deg, rgba(58, 134, 255, 0.2) 0%, rgba(131, 56, 236, 0.2) 100%);
+  border: 2px solid;
+  border-image: linear-gradient(45deg, #3a86ff, #8338ec) 1;
+  border-radius: 10px;
   padding: 8px 16px;
   display: inline-block;
   margin: 5px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  animation: uiPulse 3s ease-in-out infinite;
 }
 
-/* Name input styling */
+@keyframes uiPulse {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.2); }
+}
+
 .NameInput {
   padding: 12px 20px;
   font-size: 16px;
-  border: 2px solid #4a90e2;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid;
+  border-image: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff) 1;
+  border-radius: 10px;
+  background: 
+    linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(58, 134, 255, 0.1) 100%);
   color: #fff;
   text-align: center;
   transition: all 0.3s ease;
   margin: 5px;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
 }
 
 .NameInput:focus {
   outline: none;
-  border-color: #00ff88;
-  background: rgba(255, 255, 255, 0.15);
+  border-image: linear-gradient(45deg, #06ffa5, #00d4ff) 1;
+  background: 
+    linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(6, 255, 165, 0.1) 100%);
+  box-shadow: 0 0 20px rgba(6, 255, 165, 0.3);
 }
 
 .NameInput::placeholder {
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* Responsive design */
+/* === RESPONSIVE DESIGN === */
 @media (max-width: 600px) {
   .gameContainer {
     width: 90vw;
