@@ -1,0 +1,361 @@
+/* Base Sprite Style */
+.tile {
+  width: 16px;
+  height: 16px;
+  background-image: url('map.png');
+  /* Replace with actual path */
+  background-repeat: no-repeat;
+  display: inline-block;
+  transform: scale(3.75);
+  /* 16px * 3.75 ≈ 60px */
+  transform-origin: top left;
+  image-rendering: pixelated;
+}
+
+/* Container Grid (13x13 scaled tiles) */
+.Map_container {
+  display: grid;
+  grid-template-rows: repeat(15, 60px);
+  grid-template-columns: repeat(15, 60px);
+  background-color: #000;
+  width: fit-content;
+  /* margin: 50px auto; */
+  gap: 0;
+}
+
+.gameContainer {
+  width: 500px;
+  height: 500px;
+}
+
+body {
+  background-color: rgb(0, 0, 0);
+}
+
+.panel-yellow {
+  background-position: 0 0;
+}
+
+.door-frame {
+  background-position: -16px 0;
+}
+
+.ladder-top {
+  background-position: -32px 0;
+}
+
+.ladder-middle {
+  background-position: -48px 0;
+}
+
+.rock-purple {
+  background-position: -64px 0;
+}
+
+.rock-blue {
+  background-position: -80px 0;
+}
+
+.stone-wall-top {
+  background-position: -96px 0;
+}
+
+.snow-tree {
+  background-position: 0 -64px;
+}
+
+.snow-ground {
+  background-position: -16px -64px;
+}
+
+.ice-rock {
+  background-position: -32px -64px;
+}
+
+.cave-dark {
+  background-position: -64px -32px;
+}
+
+.cliff-edge {
+  background-position: -80px -32px;
+}
+
+.mech-leg-joint {
+  background-position: 0 -160px;
+}
+
+.mech-leg-bottom {
+  background-position: -16px -160px;
+}
+
+.mech-head {
+  background-position: -32px -160px;
+}
+
+.mech-body {
+  background-position: -48px -160px;
+}
+
+.exit-door-top {
+  background-position: -112px 0;
+}
+
+/* === WALL Tiles === */
+.WALL-tech {
+  background-position: -0px -0px;
+}
+
+/* tile(0,0): tech wall */
+.WALL-purple-rock {
+  background-position: -80px -0px;
+}
+
+/* tile(0,5): purple cliff */
+.WALL-ice {
+  background-position: -64px -48px;
+}
+
+/* tile(3,4): icy wall */
+.WALL-cliff {
+  background-position: -128px -16px;
+}
+
+/* tile(1,8): dark cliff */
+.WALL-mech {
+  background-position: -128px -96px;
+}
+
+/* tile(6,8): mech skeleton */
+
+/* === BLOCK Tiles (destructible) === */
+.BLOCK-metal {
+  background-position: -16px -0px;
+}
+
+/* tile(0,1): metal door */
+.BLOCK-terminal {
+  background-position: -64px -0px;
+}
+
+/* tile(0,4): tech terminal */
+.BLOCK-snow-rock {
+  background-position: -80px -48px;
+}
+
+/* tile(3,5): snow block */
+.BLOCK-mech-head {
+  background-position: -160px -96px;
+}
+
+/* tile(6,10): mech decor */
+
+/* === EMPTY / WALKABLE Tiles === */
+.EMPTY-snow {
+  background-position: -0px -48px;
+}
+
+/* tile(3,0): snow floor */
+.EMPTY-base {
+  background-position: -32px -0px;
+}
+
+/* tile(0,2): clean tech floor */
+.EMPTY-dark {
+  background-position: -144px -16px;
+}
+
+/* tile(1,9): dark cave floor */
+.EMPTY {
+  background: none;
+}
+
+/* Transparent fallback */
+
+/* === DECORATION Tiles (can go on EMPTY or WALL tiles) === */
+.DECOR-tree-1 {
+  background-position: -32px -48px;
+}
+
+/* tile(3,2): snow tree */
+.DECOR-tree-2 {
+  background-position: -48px -48px;
+}
+
+/* tile(3,3): alt tree */
+.DECOR-mech-leg {
+  background-position: -144px -96px;
+}
+
+/* tile(6,9): mech leg */
+.DECOR-mech-track {
+  background-position: -176px -96px;
+}
+
+/* tile(6,11): tank treads */
+.DECOR-tech-door {
+  background-position: -48px -0px;
+}
+
+/* tile(0,3): tech door frame */
+
+
+.tiledecor {
+  width: 100%;
+  height: 100%;
+  transform: scale(1.44);
+  background-image: url('map.png');
+  /* Replace with actual path */
+  background-repeat: no-repeat;
+  display: inline-block;
+  image-rendering: pixelated;
+}
+
+.timer {
+  font-size: 30px;
+  color: teal;
+}
+
+
+.powerUp {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  background-color: rgb(136, 255, 0);
+  z-index: 10;
+}
+
+.range {}
+
+.speed {}
+
+.bombCount {}
+
+/* Plaayer styling */
+
+.Player {
+  width: 60px;
+  height: 60px;
+
+  position: absolute;
+  /* transition: transform 0.3s linear; */
+  /* transform: scale(1.44); */
+  background-color: rgb(255, 255, 255);
+  z-index: 10;
+}
+.YouWin{
+  font-size: 50px;
+  color: rgb(255, 255, 255);
+
+}
+
+
+/* bomb */
+
+.bomb {
+  position: fixed;
+
+  width: 60px;
+  height: 60px;
+  background-color: red;
+  z-index: 9;
+
+}
+
+/* Chat Styles */
+.chat-container {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 250px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #444;
+    border-radius: 5px;
+    padding: 8px;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+}
+
+.messages {
+    height: 150px;
+    overflow-y: auto;
+    margin-bottom: 8px;
+}
+
+.message {
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+.player {
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.chat-input {
+    width: 100%;
+    padding: 4px;
+    background: #222;
+    color: white;
+    border: 1px solid #333;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.player-count {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 12px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 8px;
+  padding: 4px 16px;
+  display: inline-block;
+}
+@media (max-width: 600px) {
+  .player-count {
+    font-size: 1rem;
+    padding: 2px 6px;
+    margin-top: 8px;
+  }
+}
+.right-navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 160px;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.95);
+  color:  #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 32px 16px;
+  z-index: 100;
+  font-size: 1.2em;
+  gap: 24px;
+}
+
+.right-navbar .lives {
+  font-size: 1.5em;
+  margin-bottom: 16px;
+}
+
+.right-navbar .player-count {
+  font-size: 1.1em;
+  margin-bottom: 16px;
+}
+
+.right-navbar .chat-container {
+  position: static;
+  width: 100%;
+  margin-top: 24px;
+  background: rgba(0,0,0,0.08);
+  border: none;
+  border-radius: 8px;
+  color: #222;
+  font-size: 1em;
+  box-shadow: none;
+  padding: 8px 0 0 0;
+}
